@@ -20,6 +20,7 @@ public class Document {
     @GeneratedValue
     @Column(name = "id")
     private Integer id;
+
     private int regNumber;
     private Date regDate;
     private int numOfDoc;
