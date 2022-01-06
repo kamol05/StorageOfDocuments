@@ -4,48 +4,56 @@
     <meta charset="UTF-8">
     <title>[[${pagetitle}]]</title>
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.date}" >
 </head>
 <body>
 <div class="container-fluid">
   <div class="text-center"><h2>[[${pagetitle}]]</h2></div>
 
-    <form th:action="@{/user/save}" th:method="post" th:object="${user}" style="max-width: 500px; margin: 0 auto;">
+    <form th:action="@{/documents/save}" th:method="post" th:object="${document}" style="max-width: 500px; margin: 0 auto;">
       <div class="border border-secondary rounded p-md-3">
 
         <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Email</label>
+          <label class="col-sm-4 col-form-label">Рег.№</label>
           <div class="col-sm-8">
-            <input type="email" class="form-control" th:field="*{email}" required minlength="8" maxlength="45">
+            <input type="text" class="form-control" th:field="*{regNumber}" required minlength="8" maxlength="45">
           </div>
+        </div>
+
+        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+          <input placeholder="Select date" type="text" id="example" class="form-control">
+          <label for="example">Try me...</label>
+          <i class="fas fa-calendar input-prefix" tabindex=0></i>
         </div>
 
         <div class="form-group row m-3">
           <label class="col-sm-4 col-form-label">First Name</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45">
+            <input type="text" class="form-control" th:field="*{numOfDoc}" required minlength="2" maxlength="45">
           </div>
         </div>
 
         <div class="form-group row m-3">
           <label class="col-sm-4 col-form-label">Last Name</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{lastName}" required minlength="5" maxlength="15">
+            <input type="text" class="form-control" th:field="*{deliverytype}" required minlength="5" maxlength="15">
           </div>
         </div>
 
         <div class="form-group row m-3">
           <label class="col-sm-4 col-form-label">Password</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" th:field="*{password}" required minlength="8" maxlength="45">
+            <input type="password" class="form-control" th:field="*{theme}" required minlength="8" maxlength="45">
           </div>
         </div>
 
         <div class="form-group row m-3">
           <label class="col-sm-4 col-form-label">Enabled:</label>
           <div class="col-sm-8">
-            <input type="checkbox" th:field="*{enabled}" >
+            <input type="text" th:field="*{partner}" >
           </div>
         </div>
+
         <div class="text-center">
           <button type="submit" class="btn btn-primary" m-3>Save</button>
           <button type="button" class="btn btn-secondary m-3" onclick="cancelForm()" >Cancel</button>

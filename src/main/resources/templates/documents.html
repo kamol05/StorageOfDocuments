@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Manage Users</title>
+  <title>Регистрация Документа</title>
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" >
 </head>
 <body>
 <div class="container-fluid text-center">
-  <div><h2>Manage Documents</h2></div>
+  <div><h2>Регистрация Документа</h2></div>
   <div class="m-3">
-    <a class="h3" th:href="@{/users/new}">Add new Document</a>
+    <a class="h3" th:href="@{/documents/new}">Добавить Новый Документ</a>
   </div>
       <div th:if="${message}" class="alert alert-success text-center">
         [[${message}]]
@@ -18,30 +18,36 @@
     <table class="table table-bordered">
       <thead class="btn-dark">
         <tr>
-          <th>Id</th>
-          <th>Email</th>
-          <th>Name</th>
-          <th>Surname</th>
-          <th>Manage</th>
+          <th>Рег.№</th>
+          <th>Дата рег.</th>
+          <th>№ исх. док-та </th>
+          <th>Дата исх. док-та </th>
+          <th>Форма доставки </th>
+          <th>Корреспондент</th>
+          <th>Тема</th>
+          <th>Описание</th>
+          <th>Срок исполнения</th>
+          <th>Доступ</th>
+          <th>Контроль</th>
         </tr>
       </thead>
       <tbody>
         <th:block th:each="document : ${listdocs}">
           <tr>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
-            <td th:text="${document}"></td>
+            <td th:text="${document.regNumber}"></td>
+            <td th:text="${document.regDate}"></td>
+            <td th:text="${document.numOfDoc}"></td>
+            <td th:text="${document.datedoc}"></td>
+            <td th:text="${document.deliverytype}"></td>
+            <td th:text="${document.partner}"></td>
+            <td th:text="${document.theme}"></td>
+            <td th:text="${document.description}"></td>
+            <td th:text="${document.timeExecution}"></td>
+            <td th:text="${document.access}"></td>
+            <td th:text="${document.control}"></td>
             <td>
-              <a class="h4 m-3" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
-              <a class="h4"      th:href="@{'/users/delete/' + ${user.id}}">Delete</a>
+              <a class="h5 m-3" th:href="@{'/documents/edit/' + ${document.id}}">Править</a>
+              <a class="h5"      th:href="@{'/documents/delete/' + ${document.id}}">Удалить</a>
             </td>
           </tr>
         </th:block>

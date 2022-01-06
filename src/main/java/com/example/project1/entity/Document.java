@@ -25,17 +25,8 @@ public class Document {
     private Date regDate;
     private int numOfDoc;
     private Date datedoc;
-
-    @ElementCollection
-    @CollectionTable(name = "Delivery",joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "deliverytype")
-    private List<String> deliveryType;
-
-    @ElementCollection
-    @CollectionTable(name = "Parnter",joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "parnter")
-    private List<String> parnter;
-
+    private String deliverytype;
+    private String partner;
     private String theme;
     private String description;
     private Date timeExecution;
