@@ -14,7 +14,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Store {
+@Table(name = "documents")
+public class Document {
     @Id
     @GeneratedValue
     @Column(name = "id")

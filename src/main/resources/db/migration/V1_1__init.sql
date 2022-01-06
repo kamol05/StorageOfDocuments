@@ -10,7 +10,7 @@ create table parnter (
     parnter varchar(255)
                      );
 
-create table store (
+create table documents (
     id int4 not null,
     primary key (id),
     reg_number int4 not null,
@@ -27,8 +27,8 @@ create table store (
 
 alter table if exists delivery
     add constraint store_delivery_fk
-        foreign key (id) references store;
+        foreign key (id) references documents;
 
 alter table if exists parnter
     add constraint store_parnter_fk
-        foreign key (id) references store;
+        foreign key (id) references documents;
