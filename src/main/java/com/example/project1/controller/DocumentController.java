@@ -37,6 +37,7 @@ public class DocumentController {
 
     @PostMapping("/documents/save")
     public String save(Document document, RedirectAttributes re){
+        Document document1 = document;
         service.save(document);
         re.addFlashAttribute("message","The Document Has Benn Saved Succesfully");
         return "redirect:/documents";

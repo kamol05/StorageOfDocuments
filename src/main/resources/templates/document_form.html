@@ -1,56 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <title>[[${pagetitle}]]</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" >
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.date}" >
+    <link  type="text/css" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.css}" rel="stylesheet">
+    <link  type="text/css" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}" rel="stylesheet">
+    <link  type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" >
+    <link  type="text/css" th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" >
+
 </head>
 <body>
+
 <div class="container-fluid">
   <div class="text-center"><h2>[[${pagetitle}]]</h2></div>
 
     <form th:action="@{/documents/save}" th:method="post" th:object="${document}" style="max-width: 500px; margin: 0 auto;">
       <div class="border border-secondary rounded p-md-3">
 
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Рег.№</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{regNumber}" required minlength="8" maxlength="45">
-          </div>
-        </div>
-
-        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
-          <input placeholder="Select date" type="text" id="example" class="form-control">
-          <label for="example">Try me...</label>
-          <i class="fas fa-calendar input-prefix" tabindex=0></i>
-        </div>
 
         <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">First Name</label>
+          <label class="col-sm-4 col-form-label" th:bgcolor="red">Рег.№ *</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{numOfDoc}" required minlength="2" maxlength="45">
+            <input type="text" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,}$" class="form-control" th:field="*{regNumber}" required >
+<!--            <input type="text" pattern="^(?=.*[A-Za-z])?(?=.*\d)(?=.*[@$!%*#?&])?.*$" class="form-control" th:field="*{regNumber}" required >-->
           </div>
         </div>
 
         <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Last Name</label>
+          <label class="col-sm-4 col-form-label">Дата рег.</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{deliverytype}" required minlength="5" maxlength="15">
+            <div class="input-group date">
+              <input type="text" class="form-control" id="birthdate" autocomplete="off" th:field="*{regDate}"/>
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Password</label>
+          <label class="col-sm-4 col-form-label">№ исх. док-та </label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" th:field="*{theme}" required minlength="8" maxlength="45">
+            <input type="text" class="form-control" th:field="*{numOfDoc}" required>
           </div>
         </div>
 
         <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Enabled:</label>
+          <label class="col-sm-4 col-form-label">Дата исх. док-та </label>
           <div class="col-sm-8">
-            <input type="text" th:field="*{partner}" >
+            <div class="input-group date">
+              <input type="text" class="form-control" id="dateodcurrentdocument" autocomplete="off" th:field="*{datedoc}"/>
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Форма доставки</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{deliverytype}" >
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Корреспондент</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{partner}" >
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Тема</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{theme}" >
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Описание</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" th:field="*{description}" >
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Срок исполнения</label>
+          <div class="col-sm-8">
+            <div class="input-group date">
+              <input type="text" class="form-control" id="timeExecution" autocomplete="off" th:field="*{timeExecution}"/>
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Доступ:</label>
+          <div class="col-sm-8">
+            <input type="checkbox" th:field="*{access}" >
+          </div>
+        </div>
+
+        <div class="form-group row m-3">
+          <label class="col-sm-4 col-form-label">Контроль:</label>
+          <div class="col-sm-8">
+            <input type="checkbox" th:field="*{control}" >
           </div>
         </div>
 
@@ -59,18 +117,33 @@
           <button type="button" class="btn btn-secondary m-3" onclick="cancelForm()" >Cancel</button>
         </div>
 
-
       </div>
     </form>
 
-
-
 </div>
-<script type="text/javascript">
-  function cancelForm(){
-    window.location = "[[@{/users}]]";
-  }
 
-</script>
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+
+  <script type="text/javascript">
+    $('.input-group.date').datepicker({
+      autoclose: true,
+      todayHighlight: true,
+      // format: 'mm-dd-yyyy',
+      startDate: '-1d'
+    });
+  </script>
+
+  <script type="text/css">
+    .form-group.required .control-label:after {
+      color: red;
+      content: "*";
+      position: absolute;
+      margin-left: -15px;
+    }
+  </script>
+
 </body>
 </html>
