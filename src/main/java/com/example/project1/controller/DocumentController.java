@@ -5,6 +5,7 @@ import com.example.project1.exception.DocumentNotFoundException;
 import com.example.project1.service.DocumentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +37,11 @@ public class DocumentController {
     }
 
     @PostMapping("/documents/save")
-    public String save(Document document, RedirectAttributes re){
-        Document document1 = document;
+    public String save(Document document, RedirectAttributes re, BindingResult bindingResult) throws DocumentNotFoundException {
+        if (bindingResult.hasErrors()){
+
+        }
+        if (document.getId() != null){document.setRegDate(service.getById(document.getId()).getRegDate());}
         service.save(document);
         re.addFlashAttribute("message","The Document Has Benn Saved Succesfully");
         return "redirect:/documents";

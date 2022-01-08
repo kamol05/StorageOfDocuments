@@ -1,10 +1,13 @@
 package com.example.project1.entity;
 
+import jdk.jfr.Timespan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,17 +25,21 @@ public class Document {
     @Column(name = "id")
     private Integer id;
 
-    private int regNumber;
-    @Type(type="date")
+    private String regNumber;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @CreationTimestamp
     private Date regDate;
-    private int numOfDoc;
-    @Type(type="date")
+    private String numOfDoc;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date datedoc;
     private String deliverytype;
     private String partner;
     private String theme;
     private String description;
-    @Type(type="date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date timeExecution;
     private boolean access;
     private boolean control;

@@ -13,9 +13,9 @@ create sequence hibernate_sequence start 1 increment 1;
 create table documents (
     id int4 not null,
     primary key (id),
-    reg_number int4 not null,
+    reg_number varchar(255) not null,
     reg_date date not null,
-    num_of_doc int4,
+    num_of_doc varchar(255),
     datedoc date,
     deliverytype varchar(255),
     partner varchar(255),
