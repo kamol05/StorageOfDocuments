@@ -1,193 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-
-    <meta charset="UTF-8">
-    <title>[[${pagetitle}]]</title>
-    <link  type="text/css" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.css}" rel="stylesheet">
-    <link  type="text/css" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}" rel="stylesheet">
-    <link  type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" >
-    <link  type="text/css" th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" >
-
-</head>
+<head th:replace="fragments :: head" />
 <body>
 
 <div class="container-fluid">
   <div class="text-center"><h2>[[${pagetitle}]]</h2></div>
 
-    <form th:action="@{/documents/save}" th:method="post" th:object="${document}" style="max-width: 500px; margin: 0 auto;">
-      <div class="border border-secondary rounded p-md-3">
+  <form th:action="@{/documents/save}" th:method="post" th:object="${document}" style="max-width: 500px; margin: 0 auto;" enctype="multipart/form-data">
+    <div class="border border-secondary rounded p-md-3">
 
-        <div class="visually-hidden">
-          <div class="col-sm-8">
-            <input type="text" th:field="*{id}">
-          </div>
+      <div class="visually-hidden">
+        <div class="col-sm-8">
+          <input type="text" th:field="*{id}">
         </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label" th:bgcolor="red">Рег.№ *</label>
-          <div class="col-sm-8">
-            <input type="text" pattern="^(?=.*[0-9])(?=.*[\w])(?=\S+$).{1,}$" class="form-control" th:field="*{regNumber}" required >
-<!--            <input type="text" pattern="^(?=.*[A-Za-z])?(?=.*\d)(?=.*[@$!%*#?&])?.*$" class="form-control" th:field="*{regNumber}" required >-->
-          </div>
-        </div>
-
-<!--        <div class="form-group row m-3" >-->
-<!--          <label class="col-sm-4 col-form-label">Дата рег.</label>-->
-<!--          <div class="col-sm-8">-->
-<!--            <div class="input-group date" id="registrationDate">-->
-<!--              <input type="text" class="form-control" th:field="*{regDate}"/>-->
-<!--              <div class="input-group-append">-->
-<!--                <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">№ исх. док-та </label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{numOfDoc}" required>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Дата исх. док-та </label>
-          <div class="col-sm-8">
-            <div class="input-group date" id="dateOfdocument">
-              <input type="text" class="form-control"  autocomplete="off" th:field="*{datedoc}"/>
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Форма доставки</label>
-          <div class="col-sm-8">
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{deliverytype}">
-              <option value="Курьер">Курьер</option>
-              <option value="Email">Email</option>
-              <option value="Телефонограмма">Телефонограмма</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Корреспондент</label>
-          <div class="col-sm-8">
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{partner}">
-              <option value="ЦБ">ЦБ</option>
-              <option value="ГНИ">ГНИ</option>
-              <option value="ТСЖ">ТСЖ</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Тема</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" th:field="*{theme}" required>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-5 col-form-label">Сроки сполнения</label>
-          <div class="col-sm-7">
-            <div class="input-group date" id="timeExecution" >
-              <input type="text" class="form-control" autocomplete="off" th:field="*{timeExecution}"/>
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Файл</label>
-          <div class="col-sm-8">
-            <div class="file-loading">
-              <input class="form-control" id="input-22" name="input22[]" type="file" accept=".pdf,.doc,.docx" th:field="*{file}" >
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="form-check-label col-sm-3" for="inlineCheckbox1">Доступ</label>
-          <input class="form-check-input col-sm-12" type="checkbox" id="inlineCheckbox1" value="option1" th:field="*{access}">
-
-          <label class="form-check-label col-sm-3" for="inlineCheckbox2">Контроль</label>
-          <input class="form-check-input col-sm-12" type="checkbox" id="inlineCheckbox2" value="option2" th:field="*{control}">
-        </div>
-
-        <div class="form-group row m-3">
-          <label class="col-sm-4 col-form-label">Описание</label>
-          <div class="m4">
-            <textarea type="text" class="form-control" th:field="*{description}" ></textarea>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary" m-3>Сохранить</button>
-          <button type="button" class="btn btn-secondary m-3" onclick="cancelForm()" >Закрыть</button>
-        </div>
-
       </div>
-    </form>
+
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label" th:bgcolor="red">Рег.№ *</label>
+        <div class="col-sm-8">
+          <input type="text"  class="form-control" th:field="*{regNumber}">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('regNumber')}" th:errors="*{regNumber}"></p>
+        </div>
+      </div>
+
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label">№ исх. док-та </label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" th:field="*{numOfDoc}" required>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('numOfDoc')}" th:errors="*{numOfDoc}"></p>
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label">Дата исх. док-та </label>
+        <div class="col-sm-8">
+          <div class="input-group date" id="dateOfdocument">
+            <input type="text" class="form-control"  autocomplete="off" th:field="*{datedoc}"/>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('datedoc')}" th:errors="*{datedoc}"></p>
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label">Форма доставки</label>
+        <div class="col-sm-8">
+          <select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{deliverytype}">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('deliverytype')}" th:errors="*{deliverytype}"></p>
+            <option value="Курьер">Курьер</option>
+            <option value="Email">Email</option>
+            <option value="Телефонограмма">Телефонограмма</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label">Корреспондент</label>
+        <div class="col-sm-8">
+          <select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{partner}">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('partner')}" th:errors="*{partner}"></p>
+            <option value="ЦБ">ЦБ</option>
+            <option value="ГНИ">ГНИ</option>
+            <option value="ТСЖ">ТСЖ</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label">Тема</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" th:field="*{theme}" required>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"></p>
+        </div>
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-sm-5 col-form-label">Сроки сполнения</label>
+        <div class="col-sm-7">
+          <div class="input-group date" id="timeExecution" >
+            <input type="text" class="form-control" autocomplete="off" th:field="*{timeExecution}"/>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('timeExecution')}" th:errors="*{timeExecution}"></p>
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row m-3" >
+        <label class="col-sm-4 col-form-label">Файл</label>
+        <div class="col-sm-8">
+          <div class="file-loading" >
+            <input type="file" name="multik">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('file')}" th:errors="*{file}"></p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row m-3">
+        <label class="form-check-label col-sm-3" for="inlineCheckbox1">Доступ</label>
+        <input class="form-check-input col-sm-12" type="checkbox" id="inlineCheckbox1" value="option1" th:field="*{access}">
+
+        <label class="form-check-label col-sm-3" for="inlineCheckbox2">Контроль</label>
+        <input class="form-check-input col-sm-12" type="checkbox" id="inlineCheckbox2" value="option2" th:field="*{control}">
+      </div>
+      <div class="form-group row m-3">
+        <label class="col-sm-4 col-form-label">Описание</label>
+        <div class="m4">
+          <textarea type="text" class="form-control" th:field="*{description}" ></textarea>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" m-3>Сохранить</button>
+        <button type="button" class="btn btn-secondary m-3" onclick="cancelForm()" >Закрыть</button>
+      </div>
+
+    </div>
+  </form>
+
 
 </div>
-
-  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.js}"></script>
-  <script type="text/javascript" th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-  <script type="text/javascript" th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
-
-  <script type="text/javascript">
-    // $(function() {
-    //   $('#registrationDate').datepicker({
-    //     format:'yyyy-mm-dd'
-    //   }).datepicker("setDate",'now');
-    // });
-    $(function () {
-      $(document).ready(function() {
-        $("#input-22").fileinput({
-          previewFileType: "pdf",
-          allowedFileExtensions: ["pdf", "doc", "docx"],
-          previewClass: "bg-light"
-        });
-      });
-    });
-
-
-    $(function() {
-      $('#dateOfdocument').datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        format: 'yyyy-mm-dd',
-        // startDate: 'd'
-      });
-    });
-    $(function() {
-      $('#timeExecution').datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        format: 'yyyy-mm-dd',
-        startDate: 'd'
-      });
-    });
-    function cancelForm(){
-      window.location = "[[@{/documents}]]";
-    }
-  </script>
-  <script type="text/css">
-    .form-group.required .control-label:after {
-      color: red;
-      content: "*";
-      position: absolute;
-      margin-left: -15px;
-    }
-  </script>
-
 </body>
 </html>

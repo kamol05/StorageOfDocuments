@@ -8,8 +8,12 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +29,11 @@ public class Document {
     @Column(name = "id")
     private Integer id;
 
+
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[\\w])(?=\\S+$).+$",message = "oops")
+    @NotEmpty(message = "Заполните выделенные поля!")
     private String regNumber;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     @CreationTimestamp
@@ -44,5 +52,4 @@ public class Document {
     private boolean access;
     private boolean control;
     private byte[] file;
-
 }

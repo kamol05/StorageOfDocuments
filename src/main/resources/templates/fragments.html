@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title>[[${pagetitle}]]</title>
+  <link  type="text/css" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.css}" rel="stylesheet">
+  <link  type="text/css" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}" rel="stylesheet">
+  <link  type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" >
+  <link  type="text/css" th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" >
+  <link  type="text/css" th:href="@{/webjars/bootstrapvalidator/}">
+
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $(document).ready(function() {
+        $("#input-22").fileinput({
+          previewFileType: "pdf",
+          allowedFileExtensions: ["pdf", "doc", "docx"],
+          previewClass: "bg-light"
+        });
+      });
+    });
+
+
+    $(function() {
+      $('#dateOfdocument').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        // startDate: 'd'
+      });
+    });
+    $(function() {
+      $('#timeExecution').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        startDate: 'd'
+      });
+    });
+    function cancelForm(){
+      window.location = "[[@{/documents}]]";
+    }
+  </script>
+
+
+
+</head>
+<body>
+
+</body>
+</html>
