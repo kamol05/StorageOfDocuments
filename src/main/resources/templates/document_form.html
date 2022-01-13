@@ -26,10 +26,11 @@
       <div class="form-group row m-3">
         <label class="col-sm-4 col-form-label">№ исх. док-та </label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{numOfDoc}" required>
+          <input type="text" class="form-control" th:field="*{numOfDoc}">
           <p class="alert alert-danger" th:if="${#fields.hasErrors('numOfDoc')}" th:errors="*{numOfDoc}"></p>
         </div>
       </div>
+
       <div class="form-group row m-3">
         <label class="col-sm-4 col-form-label">Дата исх. док-та </label>
         <div class="col-sm-8">
@@ -42,6 +43,7 @@
           </div>
         </div>
       </div>
+
       <div class="form-group row m-3">
         <label class="col-sm-4 col-form-label">Форма доставки</label>
         <div class="col-sm-8">
@@ -53,35 +55,39 @@
           </select>
         </div>
       </div>
+
       <div class="form-group row m-3">
         <label class="col-sm-4 col-form-label">Корреспондент</label>
         <div class="col-sm-8">
           <select class="form-select form-select-sm" aria-label=".form-select-sm example" th:field="*{partner}">
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('partner')}" th:errors="*{partner}"></p>
+            <option value="" selected></option>
             <option value="ЦБ">ЦБ</option>
             <option value="ГНИ">ГНИ</option>
             <option value="ТСЖ">ТСЖ</option>
           </select>
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('partner')}" th:errors="*{partner}"></p>
         </div>
       </div>
+
       <div class="form-group row m-3">
         <label class="col-sm-4 col-form-label">Тема</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" th:field="*{theme}" required>
+          <input type="text" class="form-control" th:field="*{theme}">
           <p class="alert alert-danger" th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"></p>
         </div>
       </div>
+
       <div class="form-group row m-3">
         <label class="col-sm-5 col-form-label">Сроки сполнения</label>
         <div class="col-sm-7">
           <div class="input-group date" id="timeExecution" >
             <input type="text" class="form-control" autocomplete="off" th:field="*{timeExecution}"/>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('timeExecution')}" th:errors="*{timeExecution}"></p>
             <div class="input-group-append">
               <span class="input-group-text"><i class="far fa-calendar-alt m-1"></i></span>
             </div>
           </div>
         </div>
+        <p class="alert alert-danger" th:if="${#fields.hasErrors('timeExecution')}" th:errors="*{timeExecution}"></p>
       </div>
 
       <div class="form-group row m-3" >

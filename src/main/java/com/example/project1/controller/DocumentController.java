@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -63,11 +64,18 @@ public class DocumentController {
 
         }
 
+        if (document.getId() == null & document.getTimeExecution() != null){
+            if (document.getTimeExecution().before(new Date())){
+                result.addError(new FieldError("document", "timeExecution", "Срок исполнения не может быть раньше даты регистрации документа."));
+            }
+        }
+
+        if (document.getId() != null){document.setRegDate(service.getById(document.getId()).getRegDate());}
+
         if (result.hasErrors()){
             return "document_form";
         }
 
-        if (document.getId() != null){document.setRegDate(service.getById(document.getId()).getRegDate());}
         document.setFile(multik.getBytes());
         service.save(document);
         re.addFlashAttribute("message","The Document Has Benn Saved Succesfully");
