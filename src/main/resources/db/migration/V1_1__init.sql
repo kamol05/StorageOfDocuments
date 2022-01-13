@@ -24,7 +24,9 @@ create table documents (
     time_execution date,
     access boolean,
     control boolean,
-    file bytea
+    file bytea,
+    filename varchar(1000),
+    file_type varchar(100)
                     );
 
 -- alter table if exists delivery

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -62,4 +63,29 @@ public class Document {
     private boolean access;
     private boolean control;
     private byte[] file;
+    private String filename;
+    private String fileType;
+
+    public int getFileSize() {
+        return file.length;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", regNumber='" + regNumber + '\'' +
+                ", regDate=" + regDate +
+                ", numOfDoc='" + numOfDoc + '\'' +
+                ", datedoc=" + datedoc +
+                ", deliverytype='" + deliverytype + '\'' +
+                ", partner='" + partner + '\'' +
+                ", theme='" + theme + '\'' +
+                ", description='" + description + '\'' +
+                ", timeExecution=" + timeExecution +
+                ", access=" + access +
+                ", control=" + control +
+                ", file=" + Arrays.toString(file) +
+                '}';
+    }
 }

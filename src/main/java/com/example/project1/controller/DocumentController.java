@@ -51,6 +51,10 @@ public class DocumentController {
                        MultipartFile multik) throws IOException, DocumentNotFoundException {
 
         if (multik.getSize() > 0){
+            document.setFile(multik.getBytes());
+            document.setFilename(multik.getOriginalFilename());
+            document.setFileType(multik.getOriginalFilename().substring(multik.getOriginalFilename().lastIndexOf("."),multik.getOriginalFilename().length() -1) );
+
             if (!multik.getContentType().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
                 & !multik.getContentType().equals("application/msword")
                 & !multik.getContentType().equals("application/pdf") ){
@@ -76,7 +80,7 @@ public class DocumentController {
             return "document_form";
         }
 
-        document.setFile(multik.getBytes());
+
         service.save(document);
         re.addFlashAttribute("message","The Document Has Benn Saved Succesfully");
         return "redirect:/documents";
