@@ -16,33 +16,6 @@
   <script type="text/javascript" th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
 
   <script type="text/javascript">
-    $(function () {
-      $(document).ready(function() {
-        $("#input-22").fileinput({
-          previewFileType: "pdf",
-          allowedFileExtensions: ["pdf", "doc", "docx"],
-          previewClass: "bg-light"
-        });
-      });
-    });
-
-
-    $(function() {
-      $('#dateOfdocument').datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        format: 'yyyy-mm-dd',
-        // startDate: 'd'
-      });
-    });
-    $(function() {
-      $('#timeExecution').datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        format: 'yyyy-mm-dd',
-        // startDate: 'd'
-      });
-    });
     function cancelForm(){
       window.location = "[[@{/documents}]]";
     }

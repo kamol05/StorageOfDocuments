@@ -39,6 +39,7 @@ public class DocumentController {
     public String addDocument(Model model){
         Document document = new Document();
         document.setRegDate(new Date());
+        model.addAttribute("datetime", new Date());
         model.addAttribute("document",document);
         model.addAttribute("pageTitle","Add New Document");
         return "document_form";

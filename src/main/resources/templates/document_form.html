@@ -26,7 +26,7 @@
       <div class="form-group row m-3">
         <label class="col-sm-4 col-form-label" th:bgcolor="red">Дата рег.</label>
         <div class="col-sm-8">
-          <input  class="form-control text-center" type="date"  th:field="*{regDate}" readonly>
+          <input class="form-control" id="updateDate" th:value="${#dates.format(#dates.createNow() , 'dd-MMMM-yyyy')}" readonly/>
           <p class="alert alert-danger" th:if="${#fields.hasErrors('regDate')}" th:errors="*{regDate}"></p>
         </div>
       </div>
