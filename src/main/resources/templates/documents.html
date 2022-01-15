@@ -4,13 +4,11 @@
 
 <body>
 <div class="container-fluid text-center">
-  <div><h2>Регистрация Документа</h2></div>
-  <div class="m-3">
-    <a class="h3" th:href="@{/documents/new}">Добавить Новый Документ</a>
-  </div>
-      <div th:if="${message}" class="alert alert-success text-center">
-        [[${message}]]
-      </div>
+
+      <div><h2>Регистрация Документа</h2></div>
+      <div class="m-3"><a class="h3" th:href="@{/documents/new}">Добавить Новый Документ</a></div>
+      <div th:if="${message}" class="alert alert-success text-center">[[${message}]]</div>
+
   <div>
     <table class="table table-bordered">
       <thead class="btn-dark">

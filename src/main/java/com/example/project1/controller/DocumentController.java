@@ -3,7 +3,6 @@ package com.example.project1.controller;
 import com.example.project1.entity.Document;
 import com.example.project1.exception.DocumentNotFoundException;
 import com.example.project1.service.DocumentService;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +10,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +17,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class DocumentController {
@@ -38,7 +37,9 @@ public class DocumentController {
 
     @GetMapping("/documents/new")
     public String addDocument(Model model){
-        model.addAttribute("document",new Document());
+        Document document = new Document();
+        document.setRegDate(new Date());
+        model.addAttribute("document",document);
         model.addAttribute("pageTitle","Add New Document");
         return "document_form";
     }
@@ -48,21 +49,21 @@ public class DocumentController {
     public String save(@Valid Document document,
                        BindingResult result,
                        RedirectAttributes re,
-                       MultipartFile multik) throws IOException, DocumentNotFoundException {
+                       MultipartFile multipartFile) throws IOException, DocumentNotFoundException {
 
-        if (multik.getSize() > 0){
-            document.setFile(multik.getBytes());
-            document.setFilename(multik.getOriginalFilename());
-            document.setFileType(multik.getOriginalFilename().substring(multik.getOriginalFilename().lastIndexOf("."),multik.getOriginalFilename().length() -1) );
+        if (multipartFile.getSize() > 0){
+            document.setFile(multipartFile.getBytes());
+            document.setFilename(multipartFile.getOriginalFilename());
+            document.setFileType(Objects.requireNonNull(multipartFile.getOriginalFilename()).substring(multipartFile.getOriginalFilename().lastIndexOf("."),multipartFile.getOriginalFilename().length() -1) );
 
-            if (!multik.getContentType().equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                & !multik.getContentType().equals("application/msword")
-                & !multik.getContentType().equals("application/pdf") ){
-                if (multik.getSize() > 1048870){
+            if (!Objects.equals(multipartFile.getContentType(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                & !Objects.equals(multipartFile.getContentType(), "application/msword")
+                & !multipartFile.getContentType().equals("application/pdf") ){
+                if (multipartFile.getSize() > 1048870){
                     result.addError(new FieldError("document", "file", "Недопустимый формат и размер файла."));
                 } else
                 result.addError(new FieldError("document", "file", "Недопустимый формат"));
-            } else if (multik.getSize() > 1048870 ){
+            } else if (multipartFile.getSize() > 1048870 ){
                 result.addError(new FieldError("document", "file", "Размер файла превышает 1Мб."));
             }
 

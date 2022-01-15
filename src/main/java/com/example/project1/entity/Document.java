@@ -32,7 +32,7 @@ public class Document {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
-    @CreationTimestamp
+//    @CreationTimestamp
     private Date regDate;
 
     @Pattern(regexp = "^$|^(?=.*[0-9])(?=.*[\\w])(?=\\S+$).*$",message = "Номер не может состоять только из букв или специальных символов.")
@@ -49,11 +49,9 @@ public class Document {
 
     @NotEmpty(message = "Поле не может быть пустым.")
     @Size(max = 100)
-    @Pattern(regexp = "^$|^(?=\\w+$).*$",message = "Поле формата текст")
     private String theme;
 
     @Size(max = 1000)
-    @Pattern(regexp = "^$|^(?=\\w+$).*$",message = "Поле формата текст")
     private String description;
 
     @Temporal(TemporalType.DATE)
