@@ -19,6 +19,22 @@
     function cancelForm(){
       window.location = "[[@{/documents}]]";
     }
+    $(function() {
+      $('#dateOfdocument').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        // startDate: 'd'
+      });
+    });
+    $(function() {
+      $('#timeExecution').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        // startDate: 'd'
+      });
+    });
   </script>
 
 

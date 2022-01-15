@@ -32,7 +32,7 @@ public class Document {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
-//    @CreationTimestamp
+    @CreationTimestamp
     private Date regDate;
 
     @Pattern(regexp = "^$|^(?=.*[0-9])(?=.*[\\w])(?=\\S+$).*$",message = "Номер не может состоять только из букв или специальных символов.")
@@ -65,7 +65,9 @@ public class Document {
     private String fileType;
 
     public int getFileSize() {
+        if (file != null){
         return file.length;
+        } else return 0;
     }
 
     @Override
